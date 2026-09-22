@@ -1,10 +1,7 @@
 <x-layouts::app :title="__('Email List')">
     <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
-        <div class="flex items-center justify-between border-gray-200 pb-5 dark:border-gray-700">
-            <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {{ __('Email List') }}
-            </h2>
-        </div>
+
+        <x-page-title> {{ __('Email List') }} </x-page-title>
 
         <div class="py-4 sm:py-6">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
