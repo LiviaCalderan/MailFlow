@@ -11,7 +11,7 @@
                     <flux:input name="title" :label="__('Title')" :value="old('title')" required autofocus
                         placeholder="List Title" />
 
-                    <flux:input name="file" :label="__('File List')" type="file" required autofocus />
+                    <flux:input name="file" :label="__('File List')" type="file" accept=".csv" required autofocus />
 
 
 
