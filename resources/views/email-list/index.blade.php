@@ -3,30 +3,67 @@
 
         <x-page-title> {{ __('Email List') }} </x-page-title>
 
-        <div class="py-4 sm:py-6">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <div class="p-6 sm:p-8">
+        <x-card class="space-y-4">
 
-                        @forelse ($emailLists as $list)
 
-                            //fazer lista
 
-                        @empty
-                            <div class="flex min-h-80 flex-col items-center justify-center rounded-xl">
+            @if($emailLists->isNotEmpty() || filled(request('search')))
 
-                                <x-link-button
-                                    :href="route('email-list.create')"
-                                    class="shadow-sm hover:-translate-y-0.5 hover:shadow-md"
-                                >
-                                    {{ __('Create your first email list') }}
-                                </x-link-button>
-                            </div>
-                        @endforelse
+                <div class="flex justify-between pb-4">
 
-                    </div>
+                    <x-link-button :href="route('email-list.create')"
+                        class="shadow-sm hover:-translate-y-0.5 hover:shadow-md">
+                        {{ __('New List') }}
+                    </x-link-button>
+
+                    <x-form :action="route('email-list.index')" class="w-2/5">
+                        <flux:input name="search" autofocus :placeholder="__('Search')" />
+                    </x-form>
                 </div>
-            </div>
-        </div>
+
+                <x-table :headers="['#', __('Email List'), __('# Subscribers'), __('Actions')]">
+                    <x-slot name="body" class="divide-y divide-gray-200 dark:divide-neutral-700">
+                        @foreach ($emailLists as $list)
+                            <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
+
+                                <x-table.td
+                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                    {{$list->id}}
+                                </x-table.td>
+                                <x-table.td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                    {{$list->title}}
+                                </x-table.td>
+                                <x-table.td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                    {{$list->subscribers_count }}
+                                </x-table.td>
+                                <x-table.td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                    <button type="button"
+                                        class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-blue-600 dark:text-blue-500 hover:text-blue-700 dark:hover:text-blue-600 focus:outline-hidden focus:text-blue-700 dark:focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none">
+                                        //
+                                    </button>
+                                </x-table.td>
+
+
+                            </tr>
+                        @endforeach
+                    </x-slot>
+                </x-table>
+
+                {{  $emailLists->links()}}
+
+            @else
+                <div class="flex min-h-80 flex-col items-center justify-center rounded-xl">
+
+                    <x-link-button :href="route('email-list.create')"
+                        class="shadow-sm hover:-translate-y-0.5 hover:shadow-md">
+                        {{ __('Create your first email list') }}
+                    </x-link-button>
+                </div>
+            @endif
+
+
+
+        </x-card>
+
     </div>
 </x-layouts::app>

@@ -9,8 +9,13 @@
     $method = ($post || $put || $delete || $patch) ? 'post' : 'get';
 @endphp
 
-<form {{ $attributes }} method="post">
-    @csrf
+<form {{ $attributes }} method="{{ $method }}">
+    @if ($method != 'get')
+        @csrf
+
+    @endif
+
+
 
     @if ($put)
         @method('put')
