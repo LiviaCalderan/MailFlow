@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
         Model::unguard();
+        Model::preventLazyLoading(! app()->isProduction());
 
     }
 

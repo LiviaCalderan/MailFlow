@@ -1,0 +1,53 @@
+<x-layouts::app :title="__('Subscribers')">
+    <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
+
+        <x-page-title> {{ __('Email List') }} > {{ $emailList->title }} > {{ __('Subscribers')}}</x-page-title>
+
+        <x-card class="space-y-4">
+
+            <div class="flex justify-between pb-4">
+
+                <x-link-button :href="route('subscribers.create', $emailList)"
+                    class="shadow-sm hover:-translate-y-0.5 hover:shadow-md">
+                    {{ __('Add a New Subscriber') }}
+                </x-link-button>
+
+                <x-form :action="route('subscribers.index', $emailList)" class="w-2/5">
+                    <flux:input name="search" autofocus :placeholder="__('Search')" />
+                </x-form>
+            </div>
+
+            <x-table :headers="['#', __('Name'), __('Email'), __('Actions')]">
+                <x-slot name="body" class="divide-y divide-gray-200 dark:divide-neutral-700">
+                    @foreach ($subscribers as $subscriber)
+                        <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
+
+                            <x-table.td
+                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                {{$subscriber->id}}
+                            </x-table.td>
+                            <x-table.td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                {{$subscriber->name}}
+                            </x-table.td>
+                            <x-table.td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                {{$subscriber->email }}
+                            </x-table.td>
+                            <x-table.td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                <button type="button"
+                                    class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-blue-600 dark:text-blue-500 hover:text-blue-700 dark:hover:text-blue-600 focus:outline-hidden focus:text-blue-700 dark:focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none">
+                                    //
+                                </button>
+                            </x-table.td>
+
+
+                        </tr>
+                    @endforeach
+                </x-slot>
+            </x-table>
+
+            {{ $subscribers->links() }}
+
+        </x-card>
+
+    </div>
+</x-layouts::app>
