@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Template;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class TemplateController extends Controller
@@ -10,7 +11,22 @@ class TemplateController extends Controller
 
     public function index()
     {
-        return view('template.index');
+        $search = request("search", null);
+        $showTrash = request()->input('show_trash', false);
+
+        return view('template.index', [
+            'templates' => Template::query()
+                ->when($showTrash, fn($query) => $query->withTrashed())
+                ->when($search, fn(Builder $query) => $query
+                    ->where('name', 'like', "%$search%")
+                    ->orWhere('id', '=', $search))
+
+                ->paginate(5)
+                ->withQueryString()
+                ->appends(compact('search')),
+            'search' => $search,
+            'showTrash' => $showTrash,
+        ]);
     }
 
 

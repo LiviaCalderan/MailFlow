@@ -46,7 +46,7 @@
     dark:border-gray-600
     dark:text-gray-200
     dark:hover:border-gray-500
-    dark:hover:bg-gray-800
+    dark:hover:bg-transparent
     ' => $secondary
 
 ]) }}>
