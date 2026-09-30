@@ -1,4 +1,4 @@
-<x-layouts::app :title="__('MailFlow')">
+<x-layouts::app :title="__('Templates')">
     <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
 
         <x-breadcrumb :items="[

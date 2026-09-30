@@ -1,4 +1,4 @@
-<x-layouts::app :title="__('Email List')">
+<x-layouts::app :title="__('Subscribers')">
     <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
          <x-breadcrumb :items="[
         ['label' => __('Email List'), 'url' => route('email-list.index')],
