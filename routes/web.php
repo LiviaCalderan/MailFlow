@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\EmailListController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\TemplateController;
@@ -15,6 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 
     Route::resource('template', TemplateController::class);
+    Route::resource('campaigns', CampaignController::class)->only(['index','show', 'destroy', 'create']);
 
     // Email List
     Route::get('/email-list', [EmailListController::class, 'index'])->name('email-list.index');

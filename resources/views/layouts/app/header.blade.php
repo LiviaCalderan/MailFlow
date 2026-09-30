@@ -13,10 +13,13 @@
                 <flux:navbar.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:navbar.item>
-                <flux:navbar.item icon="list-bullet" :href="route('email-list.index')" :current="request()->routeIs('email-list.index.*')" wire:navigate>
+                <flux:navbar.item icon="paper-airplane" :href="route('campaigns.index')" :current="request()->routeIs('campaigns.*')" wire:navigate>
+                    {{ __('Campaigns') }}
+                </flux:navbar.item>
+                <flux:navbar.item icon="list-bullet" :href="route('email-list.index')" :current="request()->routeIs('email-list.*')" wire:navigate>
                     {{ __('Email List') }}
                 </flux:navbar.item>
-                <flux:navbar.item icon="document-text" :href="route('template.index')" :current="request()->routeIs('template.index.*')" wire:navigate>
+                <flux:navbar.item icon="document-text" :href="route('template.index')" :current="request()->routeIs('template.*')" wire:navigate>
                     {{ __('Templates') }}
                 </flux:navbar.item>
             </flux:navbar>
@@ -38,10 +41,13 @@
                     <flux:sidebar.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard')  }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="list-bullet" :href="route('email-list.index')" :current="request()->routeIs('email-list.index.*')" wire:navigate>
+                    <flux:sidebar.item icon="paper-airplane" :href="route('campaigns.index')" :current="request()->routeIs('campaigns.*')" wire:navigate>
+                        {{ __('Campaigns')  }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="list-bullet" :href="route('email-list.index')" :current="request()->routeIs('email-list.*')" wire:navigate>
                         {{ __('Email List')  }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="document-text" :href="route('template.index')" :current="request()->routeIs('template.index.*')" wire:navigate>
+                    <flux:sidebar.item icon="document-text" :href="route('template.index')" :current="request()->routeIs('template.*')" wire:navigate>
                         {{ __('Templates')  }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
