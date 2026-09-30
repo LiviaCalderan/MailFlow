@@ -26,7 +26,6 @@
     border
     bg-transparent
     hover:-translate-y-0.5
-    hover:border-gray-400
     hover:bg-gray-50
     active:translate-y-0
     dark:hover:bg-transparent',
@@ -36,13 +35,17 @@
     dark:hover:border-gray-500
     text-gray-700
     dark:text-gray-200
+    hover:border-gray-400
     ' => !$delete,
+
     'border-red-300
     dark:border-red-800
     dark:hover:border-red-500
     text-red-300
     dark:text-red-800
-    dark:hover:text-red-800' => $delete
+    dark:hover:text-red-800
+    hover:border-red-400
+    hover:text-red-400' => $delete
 ])}}>
 
     {{ $slot }}

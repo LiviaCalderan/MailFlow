@@ -13,9 +13,7 @@
                     <flux:input name="name" :label="__('Name')" :value="old('name', $template->name)" required autofocus
                         placeholder="Template Name" />
 
-                    <flux:textarea name="body" :label="__('Body')" :value="old('body', $template->body)" required autofocus
-                        placeholder="Email Body" />
-
+                    <x-richtext name="body" :label="__('Body')" :value="old('body', $template->body)" wire:model="body"/>
 
 
                     <div class="flex items-center space-x-4">
