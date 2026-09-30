@@ -1,7 +1,10 @@
 <x-layouts::app :title="__('Subscribers')">
     <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
-
-        <x-page-title> {{ __('Email List') }} > {{ $emailList->title }} > {{ __('Subscribers')}}</x-page-title>
+        <x-breadcrumb :items="[
+        ['label' => __('Email List'), 'url' => route('email-list.index')],
+        ['label' =>  $emailList->title, 'url' => route('email-list.index')],
+        ['label' => __('Subscribers')]
+    ]" />
 
         <x-card class="space-y-4">
 
@@ -41,7 +44,7 @@
                                 @unless ($subscriber->trashed())
                                     <x-form :action="route('subscribers.destroy', [$emailList, $subscriber])" delete
                                         onsubmit="return confirm( '{{__('Are you sure?')}}')">
-                                        <x-secondary-button type="submit">Delete</x-secondary-button>
+                                        <x-secondary-button delete type="submit">Delete</x-secondary-button>
                                     </x-form>
                                 @else
                                     <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-line-8 text-foreground">Deleted</span>

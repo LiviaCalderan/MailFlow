@@ -1,7 +1,10 @@
 <x-layouts::app :title="__('Email List')">
     <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
-
-        <x-page-title>{{ __('Email List') }} > {{ $emailList->title }} > {{ __('Add New Subscribers')}} </x-page-title>
+         <x-breadcrumb :items="[
+        ['label' => __('Email List'), 'url' => route('email-list.index')],
+        ['label' =>  $emailList->title, 'url' => route('subscribers.index', $emailList)],
+        ['label' => __('Add New Subscribers')]
+    ]" />
 
         <x-card>
             <x-form :action="route('subscribers.create', $emailList)" post>

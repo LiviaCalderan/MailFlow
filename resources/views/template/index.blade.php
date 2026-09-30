@@ -37,12 +37,15 @@
                             <x-table.td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                 @unless ($template->trashed())
                                 <div class="flex flex-row gap-2">
+                                        <x-form :action="route('template.show', $template)">
+                                            <x-secondary-button type="submit">{{__('Preview')}}</x-secondary-button>
+                                        </x-form>
                                         <x-form :action="route('template.edit', $template)">
-                                            <x-secondary-button type="submit">Update</x-secondary-button>
+                                            <x-secondary-button type="submit">{{__('Update')}}</x-secondary-button>
                                         </x-form>
                                         <x-form :action="route('template.destroy', $template)" delete
                                         onsubmit="return confirm( '{{__('Are you sure?')}}')">
-                                            <x-secondary-button delete type="submit">Delete</x-secondary-button>
+                                            <x-secondary-button delete type="submit">{{__('Delete')}}</x-secondary-button>
                                         </x-form>
                                         
                                 </div>
