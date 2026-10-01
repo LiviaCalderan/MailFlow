@@ -1,15 +1,16 @@
 <x-layouts::app :title="__('Compaigns')">
     <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
 
-        <x-page-title> {{ __('Compaigns') }}</x-page-title>
+        <x-breadcrumb :items="[
+         ['label' =>  __('Campaigns')]]" />
 
         <x-card class="space-y-4">
 
             <div class="flex justify-between pb-4">
 
-                <x-link-button :href="route('template.create')"
+                <x-link-button :href="route('campaigns.create')"
                     class="shadow-sm hover:-translate-y-0.5 hover:shadow-md">
-                    {{ __('New Compaign') }}
+                    {{ __('New Campaign') }}
                 </x-link-button>
 
                 <x-form :action="route('campaigns.index')" class="w-3/5 flex flex-row gap-4 items-center" x-data
@@ -37,7 +38,7 @@
                             <x-table.td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                 @unless ($campaign->trashed())
                                     <div class="flex flex-row gap-2">
-                                        <x-form :action="route('campaigns.show', $campaign)">
+                                        <x-form :action="route('campaigns.index')">
                                             <x-secondary-button type="submit">{{__('Preview')}}</x-secondary-button>
                                         </x-form>
                                         <x-form :action="route('campaigns.destroy', $campaign)" delete

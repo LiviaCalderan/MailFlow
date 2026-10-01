@@ -28,6 +28,13 @@ class CampaignController extends Controller
         ]);
     }
 
+    public function create(String $tab = null)
+    {
+    return view('campaign.create', [
+        'tab' => $tab,
+    ]);
+    }
+
     public function destroy(Campaign $campaign)
     {
 
