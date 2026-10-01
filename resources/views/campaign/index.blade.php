@@ -12,8 +12,8 @@
                     {{ __('New Compaign') }}
                 </x-link-button>
 
-                <x-form :action="route('campaigns.index')" class="w-3/5 flex flex-row gap-4 items-center"
-                    x-data x-ref="form">
+                <x-form :action="route('campaigns.index')" class="w-3/5 flex flex-row gap-4 items-center" x-data
+                    x-ref="form">
                     <flux:checkbox name="show_trash" :label="__('Show Deleted Records')"
                         :checked="request()->boolean('show_trash')" value="1" @click="$refs.form.submit()" />
                     <flux:input name="search" autofocus :placeholder="__('Search')" />
@@ -36,20 +36,26 @@
 
                             <x-table.td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                 @unless ($campaign->trashed())
-                                <div class="flex flex-row gap-2">
+                                    <div class="flex flex-row gap-2">
                                         <x-form :action="route('campaigns.show', $campaign)">
                                             <x-secondary-button type="submit">{{__('Preview')}}</x-secondary-button>
                                         </x-form>
                                         <x-form :action="route('campaigns.destroy', $campaign)" delete
-                                        onsubmit="return confirm( '{{__('Are you sure?')}}')">
+                                            onsubmit="return confirm( '{{__('Are you sure?')}}')">
                                             <x-secondary-button delete type="submit">{{__('Delete')}}</x-secondary-button>
                                         </x-form>
-                                        
-                                </div>
-                                    
+
+                                    </div>
+
                                 @else
-                                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium border border-line-8 text-foreground">Deleted</span>
-                                
+                                    <div class="flex flex-row gap-2">
+                                        <x-form :action="route('campaigns.restore', $campaign)" patch
+                                            onsubmit="return confirm( '{{__('Restore this campaign?')}}')">
+                                            <x-secondary-button delete type="submit">{{__('Restore')}}</x-secondary-button>
+                                        </x-form>
+                                    </div>
+
+
                                 @endunless
 
 

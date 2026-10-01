@@ -27,4 +27,20 @@ class CampaignController extends Controller
             'showTrash' => $showTrash,
         ]);
     }
+
+    public function destroy(Campaign $campaign)
+    {
+
+        $campaign->delete();
+        return back()->with('message', __('Campaign deleted from the list!'));
+    }
+
+    public function restore($campaign)
+    {
+
+        $campaign = Campaign::withTrashed()->findOrFail($campaign);
+        $campaign->restore();
+        return back()->with('message', __('Campaign restored successfully!'));
+    }
+
 }

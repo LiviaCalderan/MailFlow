@@ -17,6 +17,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('template', TemplateController::class);
     Route::resource('campaigns', CampaignController::class)->only(['index','show', 'destroy', 'create']);
+    Route::patch('/campaigns/{campaign}/restore', [CampaignController::class,'restore'])->name('campaigns.restore');
 
     // Email List
     Route::get('/email-list', [EmailListController::class, 'index'])->name('email-list.index');
