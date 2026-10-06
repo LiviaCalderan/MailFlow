@@ -6,7 +6,7 @@ use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/',  function() {
+Route::get('/', function () {
     Auth::loginUsingId(1);
 
     return to_route('dashboard');
@@ -17,8 +17,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('template', TemplateController::class);
     Route::resource('campaigns', CampaignController::class)->only(['index', 'destroy']);
-    Route::patch('/campaigns/{campaign}/restore', [CampaignController::class,'restore'])->name('campaigns.restore');
+    Route::patch('/campaigns/{campaign}/restore', [CampaignController::class, 'restore'])->name('campaigns.restore');
     Route::get('/campaigns/create/{tab?}', [CampaignController::class, 'create'])->name('campaigns.create');
+    Route::post('/campaigns/create/{tab?}', [CampaignController::class, 'store']);
 
     // Email List
     Route::get('/email-list', [EmailListController::class, 'index'])->name('email-list.index');

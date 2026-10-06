@@ -37,3 +37,5 @@
     </nav>
 </div>
 <!-- End Tab Nav -->
+
+{{ $slot }}

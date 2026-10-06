@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->boolean('track_click')->default(false);
             $table->boolean('track_open')->default(false);
             $table->text('body')->nullable();
-            $table->dateTime('send_at')->nullable();
+            $table->dateTime('sent_at')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
