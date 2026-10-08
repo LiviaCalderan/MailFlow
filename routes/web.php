@@ -4,6 +4,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\EmailListController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\TemplateController;
+use App\Http\Middleware\CampaignCreateSessionControl;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,9 +19,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('template', TemplateController::class);
     Route::resource('campaigns', CampaignController::class)->only(['index', 'destroy']);
     Route::patch('/campaigns/{campaign}/restore', [CampaignController::class, 'restore'])->name('campaigns.restore');
-    Route::get('/campaigns/create/{tab?}', [CampaignController::class, 'create'])->name('campaigns.create');
+    
+    Route::get('/campaigns/create/{tab?}', [CampaignController::class, 'create'])
+        ->middleware(CampaignCreateSessionControl::class)
+        ->name('campaigns.create');
     Route::post('/campaigns/create/{tab?}', [CampaignController::class, 'store']);
-
     // Email List
     Route::get('/email-list', [EmailListController::class, 'index'])->name('email-list.index');
     Route::get('/email-list/create', [EmailListController::class, 'create'])->name('email-list.create');
@@ -31,4 +34,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/email-list/{emailList}/subscriber/{subscriber}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';

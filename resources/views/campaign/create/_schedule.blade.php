@@ -1,6 +1,6 @@
 <div class="grid gap-6">
 
-    <flux:input type="date" name="sent_at" :label="__('Send At')" :value="old('sent_at', $data['sent_at'])" required autofocus placeholder="Subscriber Name" />
+    <flux:input type="date" name="send_at" :label="__('Send At')" :value="old('send_at', $data['send_at'])" required autofocus placeholder="Subscriber Name" />
 
 
 

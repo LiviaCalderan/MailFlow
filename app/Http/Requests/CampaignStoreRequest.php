@@ -33,7 +33,7 @@ class CampaignStoreRequest extends FormRequest
             'body' => null,
             'track_click' => null,
             'track_open' => null,
-            'sent_at' => null,
+            'send_at' => null,
         ], request()->all());
 
         if (blank($tab)) {
@@ -46,7 +46,7 @@ class CampaignStoreRequest extends FormRequest
                 'body' => ['nullable'],
                 'track_click' => ['nullable'],
                 'track_open' => ['nullable'],
-                'sent_at' => ['nullable'],
+                'send_at' => ['nullable'],
             ];
         }
 
@@ -59,7 +59,7 @@ class CampaignStoreRequest extends FormRequest
 
         if ($tab == 'schedule') {
             $rules = [
-                'sent_at' => ['required', 'date'],
+                'send_at' => ['required', 'date'],
             ];
 
         }
@@ -72,7 +72,7 @@ class CampaignStoreRequest extends FormRequest
             'body' => null,
             'track_click' => null,
             'track_open' => null,
-            'sent_at' => null,
+            'send_at' => null,
         ]);
 
         foreach ($session as $key => $value) {
