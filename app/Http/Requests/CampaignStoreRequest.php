@@ -7,9 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CampaignStoreRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
@@ -41,8 +38,8 @@ class CampaignStoreRequest extends FormRequest
             $rules = [
                 'name' => ['required', 'string', 'max:255'],
                 'subject' => ['required', 'string', 'max:40'],
-                'email_list_id' => ['nullable'],
-                'template_id' => ['nullable'],
+                'email_list_id' => ['required', 'exists:email_lists,id'],
+                'template_id' => ['required', 'exists:templates,id'],
                 'body' => ['nullable'],
                 'track_click' => ['nullable'],
                 'track_open' => ['nullable'],
@@ -50,6 +47,7 @@ class CampaignStoreRequest extends FormRequest
             ];
         }
 
+        
         if ($tab == 'template') {
 
             $rules = [
@@ -78,6 +76,11 @@ class CampaignStoreRequest extends FormRequest
         foreach ($session as $key => $value) {
             $newValue = data_get($map, $key);
 
+            if ($key == 'track_click' || $key == 'track_open') {
+                $session[$key] = $newValue;
+            }
+
+
             if (filled($newValue)) {
                 $session[$key] = $newValue;
             }
@@ -103,9 +106,12 @@ class CampaignStoreRequest extends FormRequest
 
     }
 
-    public function getData() {
+    public function getData()
+    {
         $session = session('campaigns::create');
         unset($session['_token']);
+        $session['track_click'] = $session['track_click'] ?? false;
+        $session['track_open'] = $session['track_open'] ?? false;
         return $session;
     }
 }
