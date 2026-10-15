@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Template;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -47,7 +48,6 @@ class CampaignStoreRequest extends FormRequest
             ];
         }
 
-        
         if ($tab == 'template') {
 
             $rules = [
@@ -73,16 +73,28 @@ class CampaignStoreRequest extends FormRequest
             'send_at' => null,
         ]);
 
+        $previousTemplateId = $session['template_id'] ?? null;
+
         foreach ($session as $key => $value) {
             $newValue = data_get($map, $key);
 
             if ($key == 'track_click' || $key == 'track_open') {
+                if (blank($tab)) {
+                    $session[$key] = $this->boolean($key);
+                }
+            } elseif (filled($newValue)) {
                 $session[$key] = $newValue;
             }
+        }
 
+        $templateId = $session['template_id'] ?? null;
+        $templateChanged = (string) $templateId !== (string) $previousTemplateId;
 
-            if (filled($newValue)) {
-                $session[$key] = $newValue;
+        if ($templateChanged || blank($session['body'])) {
+            $template = Template::find($templateId);
+
+            if ($template !== null) {
+                $session['body'] = $template->body;
             }
         }
 
@@ -112,6 +124,7 @@ class CampaignStoreRequest extends FormRequest
         unset($session['_token']);
         $session['track_click'] = $session['track_click'] ?? false;
         $session['track_open'] = $session['track_open'] ?? false;
+
         return $session;
     }
 }
